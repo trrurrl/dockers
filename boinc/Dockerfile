@@ -3,6 +3,7 @@ MAINTAINER trurl rick.hughes@pobox.com
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN mkdir /var/lib/boinc-client
+RUN apt-get update
 RUN apt-get install -qy boinc-client
 
 VOLUME /var/lib/boinc-client
