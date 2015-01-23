@@ -12,6 +12,4 @@ EXPOSE 31416
 USER boinc
 WORKDIR /var/lib/boinc-client
 
-RUN echo "" > /var/lib/boinc-client/gui_rpc_auth.cfg
-
 ENTRYPOINT ["boinc","allow_remote_gui_rpc"]
