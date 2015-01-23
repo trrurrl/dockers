@@ -1,13 +1,17 @@
 FROM phusion/baseimage:0.9.15
 MAINTAINER trurl rick.hughes@pobox.com
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y boinc-client
+RUN mkdir /var/lib/boinc-client
+RUN apt-get install -qy boinc-client
+
+VOLUME /var/lib/boinc-client
+
+EXPOSE 31416
 
 USER boinc
 WORKDIR /var/lib/boinc-client
 
-ADD remote_hosts.cfg /var/lib/boinc-client/remote_hosts.cfg
-ADD gui_rpc_auth.cfg /var/lib/boinc-client/gui_rpc_auth.cfg
+RUN echo "" > /var/lib/boinc-client/gui_rpc_auth.cfg
 
-ENTRYPOINT ["boinc"]
+ENTRYPOINT ["boinc","allow_remote_gui_rpc"]
